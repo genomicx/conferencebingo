@@ -479,7 +479,24 @@ html {
 
 /* Responsive */
 @media (max-width: 600px) {
-  .hero-compact h1 { font-size: 1.5rem; }
+  .page-container {
+    padding: 0 0.75rem;
+  }
+
+  .hero-compact {
+    padding: var(--gx-space-4) 0 var(--gx-space-2);
+  }
+
+  .hero-compact h1 { font-size: 1.4rem; }
+  .hero-compact p { font-size: 0.85rem; }
+
+  .mode-tabs {
+    margin: var(--gx-space-3) 0 var(--gx-space-3);
+  }
+
+  .settings-panel {
+    padding: var(--gx-space-3);
+  }
 
   .seed-row {
     flex-wrap: wrap;
@@ -490,42 +507,96 @@ html {
   }
 
   .bingo-card {
-    padding: 0.75rem;
+    padding: 0.5rem;
+    border-radius: 8px;
+    margin-left: -0.25rem;
+    margin-right: -0.25rem;
   }
 
   .bingo-card-title {
-    font-size: 1.2rem;
-    margin-bottom: 0.6rem;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.2em;
+  }
+
+  .bingo-grid {
+    border-width: 1px;
   }
 
   .bingo-cell {
-    font-size: 0.55rem;
-    padding: 0.25rem 0.15rem;
-    line-height: 1.2;
+    font-size: 0.5rem;
+    padding: 0.15rem 0.1rem;
+    line-height: 1.15;
+    border-width: 0.5px;
+  }
+
+  .bingo-cell.free-space {
+    font-size: 0.5rem;
   }
 
   .bingo-cell.number-mode {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 
   .bingo-header-cell {
-    font-size: 1rem;
-    padding: 0.35rem;
-  }
-
-  .bingo-cell.checked::after {
-    inset: 4px;
-  }
-}
-
-@media (max-width: 380px) {
-  .bingo-cell {
-    font-size: 0.55rem;
-    min-height: 50px;
-    padding: 0.25rem 0.15rem;
+    font-size: 0.9rem;
+    padding: 0.3rem;
   }
 
   .bingo-cell.checked::after {
     inset: 3px;
+  }
+
+  .bingo-banner {
+    font-size: 1.2rem;
+    padding: var(--gx-space-2);
+  }
+
+  .status-bar {
+    gap: var(--gx-space-1);
+  }
+
+  .action-row {
+    gap: var(--gx-space-1);
+  }
+}
+
+@media (max-width: 380px) {
+  .page-container {
+    padding: 0 0.5rem;
+  }
+
+  .bingo-card {
+    padding: 0.35rem;
+    margin-left: -0.35rem;
+    margin-right: -0.35rem;
+  }
+
+  .bingo-card-title {
+    font-size: 0.9rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .bingo-cell {
+    font-size: 0.45rem;
+    padding: 0.1rem;
+    line-height: 1.1;
+  }
+
+  .bingo-cell.free-space {
+    font-size: 0.45rem;
+  }
+
+  .bingo-cell.number-mode {
+    font-size: 0.85rem;
+  }
+
+  .bingo-header-cell {
+    font-size: 0.75rem;
+    padding: 0.2rem;
+  }
+
+  .bingo-cell.checked::after {
+    inset: 2px;
   }
 }
