@@ -12,7 +12,7 @@ const BingoApp = (() => {
 
   // --- LocalStorage helpers ---
   function storageKey() {
-    return 'bingo-' + currentMode + '-' + currentSeed;
+    return 'bingo-' + currentMode + '-' + currentPreset + '-' + currentSeed;
   }
 
   function saveCheckedState() {
@@ -37,54 +37,160 @@ const BingoApp = (() => {
     localStorage.removeItem(storageKey());
   }
 
-  // --- Default Conference Bingo Items ---
-  const DEFAULT_ITEMS = [
-    "Someone says 'synergy'",
-    "Speaker goes over time",
-    "Wi-Fi doesn't work",
-    "Free coffee runs out",
-    "Awkward Q&A silence",
-    "Laptop won't connect to projector",
-    "Someone's phone rings",
-    "'AI' mentioned in every talk",
-    "'Let's take this offline'",
-    "Sponsored talk disguised as science",
-    "Death by PowerPoint",
-    "'Can you see the back row?'",
-    "Fire alarm or evacuation drill",
-    "Someone asks a 5-min 'question'",
-    "Free swag grab",
-    "Name badge is upside down",
-    "Lunch runs out early",
-    "Poster session stampede",
-    "Speaker says 'next slide please'",
-    "'In the interest of time...'",
-    "Terrible venue map",
-    "Someone naps in the back row",
-    "Overly long introductions",
-    "A talk starts with a meme",
-    "Panel moderator dominates",
-    "'Circling back to...'",
-    "Vendor booth demo crash",
-    "Elevator pitch in the bathroom line",
-    "Late arrivals during keynote",
-    "'Unprecedented times'",
-    "Twitter/X drama about a talk",
-    "Someone live-tweets incorrectly",
-    "Breakout room too small",
-    "Microphone feedback screech",
-    "Temperature is wrong in the room",
-    "'Paradigm shift'",
-    "Someone plugs their startup",
-    "Networking event open bar",
-    "Session chair mispronounces a name",
-    "Abstract unrelated to the talk",
-    "'Can everyone hear me?'",
-    "Gratuitous stock photos in slides",
-    "Presenter reads slides word for word",
-    "Catering only has decaf",
-    "'Great question!'",
-  ];
+  // --- Conference Presets ---
+  const PRESETS = {
+    generic: {
+      name: 'Generic Conference',
+      items: [
+        "Someone says 'synergy'",
+        "Speaker goes over time",
+        "Wi-Fi doesn't work",
+        "Free coffee runs out",
+        "Awkward Q&A silence",
+        "Laptop won't connect to projector",
+        "Someone's phone rings",
+        "'AI' mentioned in every talk",
+        "'Let's take this offline'",
+        "Sponsored talk disguised as science",
+        "Death by PowerPoint",
+        "'Can you see the back row?'",
+        "Fire alarm or evacuation drill",
+        "Someone asks a 5-min 'question'",
+        "Free swag grab",
+        "Name badge is upside down",
+        "Lunch runs out early",
+        "Poster session stampede",
+        "Speaker says 'next slide please'",
+        "'In the interest of time...'",
+        "Terrible venue map",
+        "Someone naps in the back row",
+        "Overly long introductions",
+        "A talk starts with a meme",
+        "Panel moderator dominates",
+        "'Circling back to...'",
+        "Vendor booth demo crash",
+        "Elevator pitch in the bathroom line",
+        "Late arrivals during keynote",
+        "'Unprecedented times'",
+        "Twitter/X drama about a talk",
+        "Someone live-tweets incorrectly",
+        "Breakout room too small",
+        "Microphone feedback screech",
+        "Temperature is wrong in the room",
+        "'Paradigm shift'",
+        "Someone plugs their startup",
+        "Networking event open bar",
+        "Session chair mispronounces a name",
+        "Abstract unrelated to the talk",
+        "'Can everyone hear me?'",
+        "Gratuitous stock photos in slides",
+        "Presenter reads slides word for word",
+        "Catering only has decaf",
+        "'Great question!'",
+      ],
+    },
+    abphm: {
+      name: 'ABPHM 2025',
+      items: [
+        // On the slide
+        '"Data not shown"',
+        '"As previously described"',
+        '"More research is needed"',
+        "Sample size under 20",
+        '"Preliminary data"',
+        "Figure with no error bars",
+        "p = 0.05",
+        '"Not significant (p=0.06)"',
+        "Acknowledgements longer than conclusions",
+        "Wall of text slide",
+        "Font too small to read",
+        "Same figure used twice",
+        '"Work in progress"',
+        "Stock photo of a pipette",
+        "Phylogeny with no outgroup",
+        "Rooted tree labelled as unrooted",
+        "SNP threshold not justified",
+        "Preprint cited as peer-reviewed",
+        '"We plan to make it open source"',
+        "Bandage assembly graph",
+        "FastQC screenshot",
+        "QUAST metrics table",
+        "Microreact screenshot",
+        "BRIGx or BRIG figure",
+        "GrapeTree figure",
+        "BEAST output",
+        "One Health framework diagram",
+        "Moore's law mentioned",
+        // Someone says
+        '"Great question"',
+        '"More of a comment than a question"',
+        '"As you can see..."',
+        '"This is beyond the scope"',
+        '"We\'re working on that"',
+        '"I\'ll take that offline"',
+        '"We used default parameters"',
+        '"Democratising genomics"',
+        '"We built our own pipeline"',
+        "Someone plugs their own paper",
+        "Talk runs over time",
+        "Video won't play",
+        '"Scalable pipeline"',
+        '"Real time"',
+        '"Reproducible"',
+        '"Reference free"',
+        // Tools & buzzwords
+        "16S used instead of WGS",
+        "Kraken2",
+        "Snippy",
+        "Snakemake",
+        "Nextflow",
+        "Prokka annotation",
+        "Gubbins",
+        "Roary pan-genome",
+        "CARD database",
+        "SPAdes",
+        "Core genome MLST",
+        "Minimum spanning tree",
+        "Convergent evolution",
+        "Horizontal gene transfer",
+        "NGS",
+        "Long reads",
+        "Metagenomics",
+        "ST131",
+        // ABPHM programme specifics
+        '"Pandemic preparedness"',
+        '"Genomic surveillance"',
+        "Africa CDC mentioned",
+        "Vibrio cholerae",
+        "NDM carbapenemase",
+        '"Large language model"',
+        '"Deep learning"',
+        '"Cloud-based"',
+        '"Equity"',
+        '"Neglected tropical disease"',
+        "AllTheBacteria",
+        '"Food-borne pathogen"',
+        '"Transmission dynamics"',
+        "Outbreak reconstruction",
+        '"Low and middle income countries"',
+        "ISO accreditation mentioned",
+        '"Multi-drug resistant"',
+        "Whole genome sequencing",
+        '"Bioinformatics pipeline"',
+        "Pathogenwatch",
+        '"Antimicrobial resistance"',
+        '"Global spread"',
+        '"Lineage"',
+        '"Transmission event"',
+        '"Surveillance"',
+        "Pangenome",
+        '"Clone"',
+        "New tool, one GitHub commit",
+      ],
+    },
+  };
+
+  let currentPreset = 'generic';
 
   // --- Seeded PRNG ---
   function hashSeed(str) {
@@ -126,8 +232,13 @@ const BingoApp = (() => {
   }
 
   // --- Card Generation ---
+  function getActiveItems() {
+    if (customItems) return customItems;
+    return (PRESETS[currentPreset] || PRESETS.generic).items;
+  }
+
   function generateConferenceCard(seed) {
-    const pool = customItems || DEFAULT_ITEMS;
+    const pool = getActiveItems();
     if (pool.length < 24) {
       showAlert('custom-status', 'warning', `Need at least 24 items. Found ${pool.length}.`);
       return null;
@@ -271,6 +382,11 @@ const BingoApp = (() => {
     const url = new URL(window.location);
     url.searchParams.set('seed', currentSeed);
     url.searchParams.set('mode', currentMode);
+    if (currentMode === 'conference' && currentPreset !== 'generic') {
+      url.searchParams.set('preset', currentPreset);
+    } else {
+      url.searchParams.delete('preset');
+    }
     window.history.replaceState({}, '', url);
   }
 
@@ -278,12 +394,17 @@ const BingoApp = (() => {
     const params = new URLSearchParams(window.location.search);
     const seed = params.get('seed');
     const mode = params.get('mode');
+    const preset = params.get('preset');
     if (mode === 'number' || mode === 'conference') {
       currentMode = mode;
       document.querySelectorAll('.mode-tab').forEach(tab => {
         tab.classList.toggle('active', tab.dataset.mode === currentMode);
       });
       $('custom-section').style.display = currentMode === 'conference' ? 'block' : 'none';
+    }
+    if (preset && PRESETS[preset]) {
+      currentPreset = preset;
+      $('preset-select').value = preset;
     }
     if (seed) {
       $('seed-input').value = seed;
@@ -315,6 +436,7 @@ const BingoApp = (() => {
     customItems = null;
     $('custom-textarea').value = '';
     $('custom-status').innerHTML = '';
+    $('preset-select').value = currentPreset;
   }
 
   function showAlert(targetId, type, message) {
@@ -423,7 +545,10 @@ const BingoApp = (() => {
     doc.setTextColor(170, 170, 170);
     doc.text('conferencebingo.vercel.app', pageW / 2, pageH - 10, { align: 'center' });
 
-    doc.save('bingo-' + currentSeed + '.pdf');
+    const prefix = currentMode === 'conference'
+      ? (currentPreset !== 'generic' ? currentPreset : 'conference')
+      : 'number';
+    doc.save('bingo-' + prefix + '-' + currentSeed + '.pdf');
   }
 
   // --- Share ---
@@ -431,6 +556,11 @@ const BingoApp = (() => {
     const url = new URL(window.location);
     url.searchParams.set('seed', currentSeed);
     url.searchParams.set('mode', currentMode);
+    if (currentMode === 'conference' && currentPreset !== 'generic') {
+      url.searchParams.set('preset', currentPreset);
+    } else {
+      url.searchParams.delete('preset');
+    }
     navigator.clipboard.writeText(url.toString()).then(() => {
       const btn = $('share-btn');
       btn.textContent = 'Copied!';
@@ -451,6 +581,22 @@ const BingoApp = (() => {
 
   // --- Init ---
   function init() {
+    // Populate preset dropdown
+    const presetSelect = $('preset-select');
+    Object.entries(PRESETS).forEach(([key, preset]) => {
+      const opt = document.createElement('option');
+      opt.value = key;
+      opt.textContent = preset.name + ' (' + preset.items.length + ' items)';
+      presetSelect.appendChild(opt);
+    });
+    presetSelect.addEventListener('change', () => {
+      currentPreset = presetSelect.value;
+      customItems = null;
+      $('custom-textarea').value = '';
+      $('custom-status').innerHTML = '';
+      $('card-section').style.display = 'none';
+    });
+
     // Mode tabs
     document.querySelectorAll('.mode-tab').forEach(tab => {
       tab.addEventListener('click', () => {
