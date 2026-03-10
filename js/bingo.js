@@ -37,229 +37,22 @@ const BingoApp = (() => {
     localStorage.removeItem(storageKey());
   }
 
-  // --- Conference Presets ---
-  const PRESETS = {
-    generic: {
-      name: 'Generic Conference',
-      items: [
-        // Things someone says
-        "Someone says 'synergy'",
-        "'Let's take this offline'",
-        "'Can you see the back row?'",
-        "'In the interest of time...'",
-        "'Circling back to...'",
-        "'Unprecedented times'",
-        "'Paradigm shift'",
-        "'Can everyone hear me?'",
-        "'Great question!'",
-        "'AI' mentioned in every talk",
-        "'Moving forward...'",
-        "'Low-hanging fruit'",
-        "'Unpack that'",
-        "'Deep dive'",
-        "'Pivot'",
-        "'Ecosystem'",
-        "'Stakeholders'",
-        "'Best practices'",
-        "'Disruptive'",
-        "'Scalable'",
-        "'Actionable insights'",
-        "'Touch base'",
-        "'Circle back'",
-        "'Game changer'",
-        "'Value proposition'",
-        "'It's on the next slide'",
-        "'I'll keep this brief'",
-        "'Sorry, wrong slide'",
-        "'Bear with me'",
-        "'As I was saying...'",
-        "'To be fair...'",
-        // Talk & presentation fails
-        "Speaker goes over time",
-        "Laptop won't connect to projector",
-        "Death by PowerPoint",
-        "Speaker says 'next slide please'",
-        "Gratuitous stock photos in slides",
-        "Presenter reads slides word for word",
-        "A talk starts with a meme",
-        "Abstract unrelated to the talk",
-        "Overly long introductions",
-        "Sponsored talk disguised as science",
-        "Video won't play",
-        "Slide has a typo",
-        "Wrong aspect ratio on slides",
-        "Laser pointer circles aimlessly",
-        "Speaker faces the screen not the audience",
-        "Slides in Comic Sans",
-        "Chart with no axis labels",
-        "Pie chart with too many slices",
-        "Screenshot of a spreadsheet",
-        "Slide still has 'Click to add title'",
-        "Watermark on stock image",
-        "Speaker skips 10 slides",
-        "Animations on every slide",
-        "Presenter uses their phone as notes",
-        // Q&A moments
-        "Awkward Q&A silence",
-        "Someone asks a 5-min 'question'",
-        "Panel moderator dominates",
-        "Question is actually a statement",
-        "Same person asks three questions",
-        "Question completely off topic",
-        "Chair cuts off the Q&A",
-        "'More of a comment than a question'",
-        "Questioner starts with their own CV",
-        // Venue & logistics
-        "Wi-Fi doesn't work",
-        "Free coffee runs out",
-        "Fire alarm or evacuation drill",
-        "Terrible venue map",
-        "Breakout room too small",
-        "Microphone feedback screech",
-        "Temperature is wrong in the room",
-        "Lunch runs out early",
-        "Catering only has decaf",
-        "No power outlets anywhere",
-        "Queue for the bathroom",
-        "Lift takes forever",
-        "Registration queue chaos",
-        "Badge on wrong lanyard colour",
-        "Venue has no phone signal",
-        "Room change not announced",
-        "Projector makes a loud fan noise",
-        "Air conditioning too loud",
-        "Chair too uncomfortable to sit in",
-        // People & networking
-        "Someone's phone rings",
-        "Someone naps in the back row",
-        "Someone plugs their startup",
-        "Name badge is upside down",
-        "Late arrivals during keynote",
-        "Twitter/X drama about a talk",
-        "Someone live-tweets incorrectly",
-        "Elevator pitch in the bathroom line",
-        "Networking event open bar",
-        "Session chair mispronounces a name",
-        "Someone takes a photo of every slide",
-        "Loud typing during a talk",
-        "Group blocks the hallway",
-        "Someone wearing conference merch from last year",
-        "Animated LinkedIn post about the event",
-        "Selfie with the keynote speaker",
-        "Business card exchange",
-        // Swag & misc
-        "Free swag grab",
-        "Vendor booth demo crash",
-        "Poster session stampede",
-        "Tote bag from a sponsor",
-        "Free pen that doesn't work",
-        "QR code that leads nowhere",
-        "App nobody downloaded",
-        "Hashtag misspelled",
-      ],
-    },
-    abphm: {
-      name: 'ABPHM 2025',
-      items: [
-        // On the slide
-        '"Data not shown"',
-        '"As previously described"',
-        '"More research is needed"',
-        "Sample size under 20",
-        '"Preliminary data"',
-        "Figure with no error bars",
-        "p = 0.05",
-        '"Not significant (p=0.06)"',
-        "Acknowledgements longer than conclusions",
-        "Wall of text slide",
-        "Font too small to read",
-        "Same figure used twice",
-        '"Work in progress"',
-        "Stock photo of a pipette",
-        "Phylogeny with no outgroup",
-        "Rooted tree labelled as unrooted",
-        "SNP threshold not justified",
-        "Preprint cited as peer-reviewed",
-        '"We plan to make it open source"',
-        "Bandage assembly graph",
-        "FastQC screenshot",
-        "QUAST metrics table",
-        "Microreact screenshot",
-        "BRIGx or BRIG figure",
-        "GrapeTree figure",
-        "BEAST output",
-        "One Health framework diagram",
-        "Moore's law mentioned",
-        // Someone says
-        '"Great question"',
-        '"More of a comment than a question"',
-        '"As you can see..."',
-        '"This is beyond the scope"',
-        '"We\'re working on that"',
-        '"I\'ll take that offline"',
-        '"We used default parameters"',
-        '"Democratising genomics"',
-        '"We built our own pipeline"',
-        "Someone plugs their own paper",
-        "Talk runs over time",
-        "Video won't play",
-        '"Scalable pipeline"',
-        '"Real time"',
-        '"Reproducible"',
-        '"Reference free"',
-        // Tools & buzzwords
-        "16S used instead of WGS",
-        "Kraken2",
-        "Snippy",
-        "Snakemake",
-        "Nextflow",
-        "Prokka annotation",
-        "Gubbins",
-        "Roary pan-genome",
-        "CARD database",
-        "SPAdes",
-        "Core genome MLST",
-        "Minimum spanning tree",
-        "Convergent evolution",
-        "Horizontal gene transfer",
-        "NGS",
-        "Long reads",
-        "Metagenomics",
-        "ST131",
-        // ABPHM programme specifics
-        '"Pandemic preparedness"',
-        '"Genomic surveillance"',
-        "Africa CDC mentioned",
-        "Vibrio cholerae",
-        "NDM carbapenemase",
-        '"Large language model"',
-        '"Deep learning"',
-        '"Cloud-based"',
-        '"Equity"',
-        '"Neglected tropical disease"',
-        "AllTheBacteria",
-        '"Food-borne pathogen"',
-        '"Transmission dynamics"',
-        "Outbreak reconstruction",
-        '"Low and middle income countries"',
-        "ISO accreditation mentioned",
-        '"Multi-drug resistant"',
-        "Whole genome sequencing",
-        '"Bioinformatics pipeline"',
-        "Pathogenwatch",
-        '"Antimicrobial resistance"',
-        '"Global spread"',
-        '"Lineage"',
-        '"Transmission event"',
-        '"Surveillance"',
-        "Pangenome",
-        '"Clone"',
-        "New tool, one GitHub commit",
-      ],
-    },
-  };
-
+  // --- Conference Presets (loaded from /presets/*.json) ---
+  const PRESETS = {};
   let currentPreset = 'generic';
+
+  async function loadPresets() {
+    try {
+      const indexRes = await fetch('presets/index.json');
+      const presetIds = await indexRes.json();
+      await Promise.all(presetIds.map(async (id) => {
+        const res = await fetch('presets/' + id + '.json');
+        PRESETS[id] = await res.json();
+      }));
+    } catch (e) {
+      console.error('Failed to load presets:', e);
+    }
+  }
 
   // --- Seeded PRNG ---
   function hashSeed(str) {
@@ -665,7 +458,10 @@ const BingoApp = (() => {
   }
 
   // --- Init ---
-  function init() {
+  async function init() {
+    // Load presets from JSON files
+    await loadPresets();
+
     // Populate preset dropdown
     const presetSelect = $('preset-select');
     Object.entries(PRESETS).forEach(([key, preset]) => {
