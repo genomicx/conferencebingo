@@ -429,6 +429,31 @@ const BingoApp = (() => {
     doc.save('bingo-' + prefix + '-' + currentSeed + '.pdf');
   }
 
+  // --- PNG Export ---
+  function exportPNG() {
+    const card = document.querySelector('.bingo-card');
+    const btn = $('export-png-btn');
+    btn.textContent = 'Exporting...';
+    btn.disabled = true;
+
+    html2canvas(card, {
+      scale: 2,
+      backgroundColor: null,
+      useCORS: true,
+    }).then(canvas => {
+      const link = document.createElement('a');
+      const prefix = currentMode === 'conference'
+        ? (currentPreset !== 'generic' ? currentPreset : 'conference')
+        : 'number';
+      link.download = 'bingo-' + prefix + '-' + currentSeed + '.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }).finally(() => {
+      btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;vertical-align:-2px;"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>Export PNG';
+      btn.disabled = false;
+    });
+  }
+
   // --- Share ---
   function copyShareURL() {
     const url = new URL(window.location);
@@ -501,6 +526,7 @@ const BingoApp = (() => {
 
     // Card actions
     $('export-pdf-btn').addEventListener('click', exportPDF);
+    $('export-png-btn').addEventListener('click', exportPNG);
     $('share-btn').addEventListener('click', copyShareURL);
     $('seed-display').addEventListener('click', copySeed);
     $('reset-btn').addEventListener('click', () => {
