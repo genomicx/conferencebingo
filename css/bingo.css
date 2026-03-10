@@ -203,11 +203,50 @@
   100% { transform: scale(1); opacity: 1; }
 }
 
+/* Paper card wrapper */
+.bingo-card {
+  background: #fffef7;
+  border: 2px solid #d4c9a8;
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.08),
+    0 8px 24px rgba(0, 0, 0, 0.04),
+    inset 0 0 60px rgba(210, 195, 150, 0.08);
+  margin-bottom: var(--gx-space-4);
+  position: relative;
+}
+
+[data-theme="dark"] .bingo-card {
+  background: #1c1f26;
+  border-color: #3a3d45;
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    0 8px 24px rgba(0, 0, 0, 0.2),
+    inset 0 0 60px rgba(255, 255, 255, 0.02);
+}
+
+.bingo-card-title {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 0.25em;
+  color: var(--gx-accent);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
 .bingo-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 4px;
-  margin-bottom: var(--gx-space-4);
+  gap: 0;
+  border: 2px solid #bfb899;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .bingo-grid {
+  border-color: #4a4d55;
 }
 
 .bingo-grid.has-headers {
@@ -217,25 +256,24 @@
 .bingo-header-cell {
   background: var(--gx-accent);
   color: #fff;
-  font-weight: 700;
-  font-size: 1.25rem;
+  font-weight: 800;
+  font-size: 1.4rem;
   text-align: center;
-  padding: 0.5rem;
-  border-radius: var(--gx-radius-sm);
+  padding: 0.6rem;
   font-family: var(--gx-font-sans);
+  letter-spacing: 0.05em;
 }
 
 .bingo-cell {
-  background: var(--gx-surface);
-  border: 2px solid var(--gx-border);
-  border-radius: var(--gx-radius);
+  background: #fffef7;
+  border: 1px solid #d4c9a8;
   padding: 0.6rem 0.4rem;
   text-align: center;
   font-size: 0.75rem;
   font-weight: 500;
-  color: var(--gx-text);
+  color: #3d3a32;
   cursor: pointer;
-  transition: all var(--gx-transition);
+  transition: all 0.15s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -246,30 +284,43 @@
   position: relative;
 }
 
-.bingo-cell:hover {
-  border-color: var(--gx-accent);
+[data-theme="dark"] .bingo-cell {
+  background: #1c1f26;
+  border-color: #3a3d45;
+  color: var(--gx-text);
 }
 
+.bingo-cell:hover {
+  background: #f5f0e0;
+}
+
+[data-theme="dark"] .bingo-cell:hover {
+  background: #262930;
+}
+
+/* Checked: dauber/stamp look */
 .bingo-cell.checked {
-  background: rgba(13, 148, 136, 0.12);
-  border-color: var(--gx-accent);
-  color: var(--gx-accent);
-  font-weight: 600;
+  background: #fffef7;
+  color: #3d3a32;
+  font-weight: 500;
 }
 
 [data-theme="dark"] .bingo-cell.checked {
-  background: rgba(45, 212, 191, 0.15);
+  background: #1c1f26;
+  color: var(--gx-text);
 }
 
 .bingo-cell.checked::after {
   content: '';
   position: absolute;
-  top: 4px;
-  right: 4px;
-  width: 8px;
-  height: 8px;
-  background: var(--gx-accent);
+  inset: 6px;
+  background: radial-gradient(circle, rgba(13, 148, 136, 0.35) 0%, rgba(13, 148, 136, 0.18) 60%, transparent 70%);
   border-radius: 50%;
+  pointer-events: none;
+}
+
+[data-theme="dark"] .bingo-cell.checked::after {
+  background: radial-gradient(circle, rgba(45, 212, 191, 0.35) 0%, rgba(45, 212, 191, 0.18) 60%, transparent 70%);
 }
 
 .bingo-cell.free-space {
@@ -287,20 +338,20 @@
 }
 
 .bingo-cell.winning {
-  background: var(--gx-accent);
+  background: var(--gx-accent) !important;
   border-color: var(--gx-accent);
-  color: #fff;
+  color: #fff !important;
   font-weight: 700;
   animation: cell-glow 0.6s ease;
 }
 
 .bingo-cell.winning::after {
-  background: #fff;
+  display: none;
 }
 
 @keyframes cell-glow {
-  0% { box-shadow: 0 0 0 0 rgba(13, 148, 136, 0.4); }
-  100% { box-shadow: 0 0 0 4px rgba(13, 148, 136, 0); }
+  0% { box-shadow: inset 0 0 0 0 rgba(255, 255, 255, 0.4); }
+  100% { box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0); }
 }
 
 .bingo-cell.number-mode {
@@ -409,6 +460,15 @@
     min-width: 100%;
   }
 
+  .bingo-card {
+    padding: 0.75rem;
+  }
+
+  .bingo-card-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.6rem;
+  }
+
   .bingo-cell {
     font-size: 0.6rem;
     padding: 0.35rem 0.2rem;
@@ -426,10 +486,7 @@
   }
 
   .bingo-cell.checked::after {
-    width: 6px;
-    height: 6px;
-    top: 3px;
-    right: 3px;
+    inset: 4px;
   }
 }
 
@@ -438,10 +495,9 @@
     font-size: 0.55rem;
     min-height: 50px;
     padding: 0.25rem 0.15rem;
-    border-width: 1px;
   }
 
-  .bingo-grid {
-    gap: 2px;
+  .bingo-cell.checked::after {
+    inset: 3px;
   }
 }

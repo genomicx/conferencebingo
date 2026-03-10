@@ -10,6 +10,33 @@ const BingoApp = (() => {
   let customItems = null;
   let hasBingo = false;
 
+  // --- LocalStorage helpers ---
+  function storageKey() {
+    return 'bingo-' + currentMode + '-' + currentSeed;
+  }
+
+  function saveCheckedState() {
+    if (!currentSeed) return;
+    localStorage.setItem(storageKey(), JSON.stringify([...checkedCells]));
+  }
+
+  function loadCheckedState() {
+    if (!currentSeed) return;
+    const saved = localStorage.getItem(storageKey());
+    if (saved) {
+      try {
+        checkedCells = new Set(JSON.parse(saved));
+      } catch (e) {
+        checkedCells = new Set();
+      }
+    }
+  }
+
+  function clearCheckedState() {
+    if (!currentSeed) return;
+    localStorage.removeItem(storageKey());
+  }
+
   // --- Default Conference Bingo Items ---
   const DEFAULT_ITEMS = [
     "Someone says 'synergy'",
@@ -189,6 +216,7 @@ const BingoApp = (() => {
     } else {
       checkedCells.add(index);
     }
+    saveCheckedState();
     renderCard();
   }
 
@@ -212,13 +240,20 @@ const BingoApp = (() => {
   }
 
   // --- Card Management ---
-  function generateCard() {
+  function generateCard(fresh) {
     const seedInput = $('seed-input');
     currentSeed = seedInput.value.trim().toUpperCase() || generateRandomSeed();
     seedInput.value = currentSeed;
 
-    checkedCells = new Set();
     hasBingo = false;
+
+    if (fresh) {
+      clearCheckedState();
+      checkedCells = new Set();
+    } else {
+      checkedCells = new Set();
+      loadCheckedState();
+    }
 
     cardItems = currentMode === 'conference'
       ? generateConferenceCard(currentSeed)
@@ -431,7 +466,7 @@ const BingoApp = (() => {
     $('generate-btn').addEventListener('click', generateCard);
     $('random-seed-btn').addEventListener('click', () => {
       $('seed-input').value = generateRandomSeed();
-      generateCard();
+      generateCard(true);
     });
     $('seed-input').addEventListener('keydown', (e) => {
       if (e.key === 'Enter') generateCard();
@@ -444,11 +479,12 @@ const BingoApp = (() => {
     $('reset-btn').addEventListener('click', () => {
       checkedCells = new Set();
       hasBingo = false;
+      saveCheckedState();
       renderCard();
     });
     $('new-card-btn').addEventListener('click', () => {
       $('seed-input').value = generateRandomSeed();
-      generateCard();
+      generateCard(true);
     });
 
     // Custom items toggle
