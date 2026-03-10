@@ -221,14 +221,30 @@ const BingoApp = (() => {
     return a;
   }
 
-  // --- Seed Generation ---
+  // --- Seed Generation (dictionary words) ---
+  const SEED_WORDS = [
+    'AMBER','APPLE','ATLAS','BADGE','BEACH','BLAZE','BLOOM','BRAVE','BRICK',
+    'BRISK','BROOK','CAMEL','CANDY','CEDAR','CHARM','CHESS','CHIEF','CHIMP',
+    'CLIFF','CLOUD','CLOWN','COBRA','CORAL','COMET','CRANE','CRISP','CROWN',
+    'DANCE','DELTA','DINGO','DRAKE','DREAM','DRIFT','EAGLE','EMBER','FABLE',
+    'FAIRY','FLAME','FLASK','FLINT','FLORA','FORGE','FROST','GHOST','GIANT',
+    'GLEAM','GLOBE','GRAPE','GROVE','GUARD','GUAVA','GUSTY','HAVEN','HAZEL',
+    'HERON','HONEY','HORSE','IVORY','JEWEL','JOLLY','KARMA','KAYAK','KIOSK',
+    'KNIFE','KOALA','LATCH','LEMON','LILAC','LLAMA','LUCKY','LUNAR','LYRIC',
+    'MAGIC','MANGO','MAPLE','MARSH','MEDAL','MELON','MIRTH','MOOSE','MOUNT',
+    'NOBLE','NORTH','NOVEL','OCEAN','OLIVE','OMEGA','ONION','ORBIT','OTTER',
+    'OZONE','PANDA','PEACH','PEARL','PERCH','PILOT','PIXEL','PLAID','PLUME',
+    'POLAR','PRISM','PULSE','QUAIL','QUEEN','QUEST','QUIET','QUIRK','QUOTA',
+    'RADAR','RAVEN','RIDGE','RIVER','ROBIN','ROCKY','ROVER','ROYAL','RUSTY',
+    'SCOUT','SHARK','SHELL','SHINE','SLOTH','SNOWY','SOLAR','SONIC','SPARK',
+    'SPICE','SPIKE','SQUID','STEAM','STEEL','STONE','STORM','STORK','SUGAR',
+    'SWIFT','TANGO','TIGER','TITAN','TOPAZ','TORCH','TROUT','TULIP','ULTRA',
+    'UMBRA','UNITE','UPPER','VAPOR','VAULT','VENOM','VIGOR','VIOLA','VIVID',
+    'WALTZ','WHALE','WHEAT','WINDS','WITTY','WOODY','XENON','YACHT','ZEBRA',
+  ];
+
   function generateRandomSeed() {
-    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-    let seed = '';
-    for (let i = 0; i < 6; i++) {
-      seed += chars[Math.floor(Math.random() * chars.length)];
-    }
-    return seed;
+    return SEED_WORDS[Math.floor(Math.random() * SEED_WORDS.length)];
   }
 
   // --- Card Generation ---
