@@ -1,5 +1,9 @@
 /* Conference Bingo - App-specific styles */
 
+html {
+  overflow-y: scroll;
+}
+
 .page-container {
   max-width: 720px;
   margin: 0 auto;
