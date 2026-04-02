@@ -19,8 +19,8 @@
 
 :root {
   /* --- Shared (theme-independent) --- */
-  --gx-accent:       #14B8A6;
-  --gx-accent-hover: #2DD4BF;
+  --gx-accent:       #0d9488;
+  --gx-accent-hover: #0f766e;
   --gx-indigo:       #6366F1;
   --gx-success:      #14B8A6;
   --gx-warning:      #F59E0B;
@@ -56,36 +56,40 @@
   --gx-bg:            #0F172A;
   --gx-bg-alt:        #1E293B;
   --gx-bg-elevated:   #253349;
-  --gx-text:          #E2E8F0;
+  --gx-text:          #F1F5F9;
   --gx-text-muted:    #94A3B8;
   --gx-text-bright:   #F1F5F9;
+  --gx-text-inverted: #0F172A;
   --gx-border:        #334155;
-  --gx-accent-dim:    rgba(20, 184, 166, 0.1);
-  --gx-accent-15:     rgba(20, 184, 166, 0.15);
+  --gx-accent:        #2dd4bf;
+  --gx-accent-hover:  #14b8a6;
+  --gx-accent-dim:    rgba(45, 212, 191, 0.1);
+  --gx-accent-15:     rgba(45, 212, 191, 0.15);
   --gx-indigo-dim:    rgba(99, 102, 241, 0.1);
   --gx-nav-bg:        rgba(15, 23, 42, 0.9);
   --gx-code-bg:       #0F172A;
   --gx-shadow:        0 1px 3px rgba(0, 0, 0, 0.3);
-  --gx-logo-stroke:   #14B8A6;
   color-scheme: dark;
 }
 
 /* --- LIGHT THEME --- */
 [data-theme="light"] {
-  --gx-bg:            #FFFFFF;
-  --gx-bg-alt:        #F8FAFC;
+  --gx-bg:            #f8fafc;
+  --gx-bg-alt:        #f1f5f9;
   --gx-bg-elevated:   #F1F5F9;
-  --gx-text:          #334155;
-  --gx-text-muted:    #64748B;
+  --gx-text:          #0f172a;
+  --gx-text-muted:    #64748b;
   --gx-text-bright:   #0F172A;
-  --gx-border:        #E2E8F0;
-  --gx-accent-dim:    rgba(20, 184, 166, 0.08);
-  --gx-accent-15:     rgba(20, 184, 166, 0.12);
+  --gx-text-inverted: #ffffff;
+  --gx-border:        #e2e8f0;
+  --gx-accent:        #0d9488;
+  --gx-accent-hover:  #0f766e;
+  --gx-accent-dim:    rgba(13, 148, 136, 0.08);
+  --gx-accent-15:     rgba(13, 148, 136, 0.12);
   --gx-indigo-dim:    rgba(99, 102, 241, 0.08);
   --gx-nav-bg:        rgba(255, 255, 255, 0.9);
   --gx-code-bg:       #F1F5F9;
   --gx-shadow:        0 1px 3px rgba(0, 0, 0, 0.08);
-  --gx-logo-stroke:   #0D9488;
   color-scheme: light;
 }
 
@@ -205,20 +209,25 @@ img {
 .gx-nav-logo {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
+  text-decoration: none;
+  transition: opacity var(--gx-transition);
+}
+
+.gx-nav-logo:hover { opacity: 0.9; }
+
+.gx-nav-logo-name {
   font-weight: 700;
   font-size: 1.125rem;
-  color: var(--gx-text-bright);
+  color: var(--gx-text);
   letter-spacing: -0.02em;
+  line-height: 1.2;
 }
 
-.gx-nav-logo svg {
-  width: 24px;
-  height: 24px;
-}
-
-.gx-nav-logo span {
-  color: var(--gx-accent);
+.gx-nav-logo-sub {
+  font-size: 0.7rem;
+  color: var(--gx-text-muted);
+  line-height: 1;
 }
 
 .gx-nav-links {
