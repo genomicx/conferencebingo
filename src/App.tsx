@@ -3,6 +3,7 @@ import { NavBar, AppFooter } from '@genomicx/ui'
 import { useEffect } from 'react'
 import { BingoPage } from './pages/BingoPage'
 import { About } from './pages/About'
+import { APP_VERSION } from './lib/version'
 import './App.css'
 
 export default function App() {
@@ -13,7 +14,7 @@ export default function App() {
 
   return (
     <div className="app">
-      <NavBar appName="Conference Bingo" appSubtitle="for your next conference" version="0.1.0" githubUrl="https://github.com/genomicx/conferencebingo" icon={
+      <NavBar appName="Conference Bingo" appSubtitle="for your next conference" version={APP_VERSION} githubUrl="https://github.com/genomicx/conferencebingo" icon={
         <svg className="gx-nav-logo-icon" viewBox="0 0 24 24" fill="none" stroke="var(--gx-accent)" strokeWidth="1.5">
           {/* 3x3 bingo-style grid */}
           <rect x="3" y="3" width="5" height="5" />
