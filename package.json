@@ -1,7 +1,15 @@
 {
   "name": "conferencebingo",
   "version": "0.1.0",
+  "description": "Interactive conference bingo card generator with shareable seed-based URLs",
   "type": "module",
+  "license": "MIT",
+  "author": "Nabil-Fareed Alikhan",
+  "homepage": "https://conferencebingo.genomicx.org",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/genomicx/conferencebingo.git"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -11,13 +19,13 @@
     "check": "npx tsc --noEmit"
   },
   "dependencies": {
-    "@genomicx/ui": "^0.8.0",
+    "@genomicx/ui": "^0.9.0",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.2",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
     "react-hot-toast": "^2.6.0",
-    "react-router-dom": "^7.5.0"
+    "react-router-dom": "^7.14.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.59.1",
@@ -25,8 +33,8 @@
     "@testing-library/jest-dom": "^6.6.0",
     "@testing-library/react": "^16.3.0",
     "@types/node": "^25.5.1",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^4.4.1",
     "jsdom": "^26.0.0",
     "tailwindcss": "^4.2.2",
