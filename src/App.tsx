@@ -33,7 +33,7 @@ export default function App() {
           <Route path="/about" element={<About />} />
         </Routes>
       </main>
-      <AppFooter appName="Conference Bingo" bugReportUrl="https://github.com/genomicx/conferencebingo/issues" />
+      <AppFooter appName="Conference Bingo" bugReportEmail="nabil@happykhan.com" bugReportUrl="https://github.com/genomicx/conferencebingo/issues" />
     </div>
   )
 }
