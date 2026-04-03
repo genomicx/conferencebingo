@@ -219,7 +219,7 @@
 .alert-warning {
   background: rgba(245, 158, 11, 0.1);
   border: 1px solid rgba(245, 158, 11, 0.3);
-  color: #b45309;
+  color: var(--gx-warning);
 }
 
 .alert-info {
