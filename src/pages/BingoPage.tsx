@@ -326,7 +326,7 @@ export function BingoPage() {
       {/* Bingo Card */}
       {cardVisible && items.length > 0 && (
         <div className="card-section">
-          <div ref={cardRef}>
+          <div ref={cardRef} className="card-ref">
             <BingoCard
               items={items}
               checkedCells={checkedCells}
