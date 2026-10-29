@@ -2,6 +2,8 @@
 
 > Interactive bingo cards for conferences — shareable via URL seed.
 
+**Live app:** [conferencebingo.genomicx.org](https://conferencebingo.genomicx.org)
+
 Conference Bingo generates randomised 5x5 bingo cards loaded with buzzwords and clichés from your field. Mark off squares as you hear them in talks. Cards are seed-based, so you can share the same card with colleagues or give everyone a unique one. All processing happens in your browser — no data is sent anywhere.
 
 ## Features
@@ -23,11 +25,14 @@ Conference Bingo generates randomised 5x5 bingo cards loaded with buzzwords and 
 ## Getting Started
 
 ```bash
+nvm use  # Node 24
 npm install
 npm run dev
 ```
 
 Open http://localhost:5173
+
+Cloudflare Pages builds `main` with Node 24 (`NODE_VERSION=24`), `npm run build`, and the `dist` output directory. The shared `@genomicx/ui` theme bundles IBM Plex fonts locally.
 
 ## Running Tests
 

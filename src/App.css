@@ -185,7 +185,7 @@
   padding: 0.75rem;
   border: 1px solid var(--gx-border);
   border-radius: var(--gx-radius);
-  font-family: var(--gx-font-mono, 'JetBrains Mono', monospace);
+  font-family: var(--gx-font-mono);
   font-size: 0.85rem;
   background: var(--gx-bg);
   color: var(--gx-text);
@@ -334,7 +334,7 @@
 .bingo-cell.number-mode {
   font-size: 1.25rem;
   font-weight: 700;
-  font-family: var(--gx-font-mono, 'JetBrains Mono', monospace);
+  font-family: var(--gx-font-mono);
 }
 
 .bingo-cell.free-space {
@@ -398,7 +398,7 @@
 }
 
 .seed-code {
-  font-family: var(--gx-font-mono, 'JetBrains Mono', monospace);
+  font-family: var(--gx-font-mono);
   font-weight: 600;
   color: var(--gx-accent);
   letter-spacing: 0.05em;
